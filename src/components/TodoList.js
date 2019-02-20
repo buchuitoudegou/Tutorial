@@ -1,4 +1,5 @@
 import React from 'react';
+import Todo from './Todo';
 import { connect } from 'react-redux';
 
 function getTodoById(state, id) {
@@ -11,24 +12,15 @@ const mapStateToProps = (state) => {
   return { todos: todoList };
 };
 
-// class TodoList extends React.Component {
-//   constructor(props) {
-//     super(props);
-//   }
-  
-//   render() {
-//     return (
-//       <div>
-//         { this.props.todos.length }
-//       </div>
-//     );
-//   }
-// };
 
-function TodoList(props) {
+function TodoList({ todos }) {
   return (
     <div>
-      { props.todos.length }
+      { todos && todos.length 
+        ? todos.map((todo) => {
+          return <Todo key={`todo-${todo.id}`} todo={todo} />
+        }) : "No Todo Item."
+      }
     </div>
   )
 }
